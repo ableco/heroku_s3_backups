@@ -1,6 +1,6 @@
 require "s3"
 require "heroku_s3_backups/version"
-require "./lib/heroku_cli.rb"
+require "heroku_cli.rb"
 
 class HerokuS3Backups
   include HerokuCLI
