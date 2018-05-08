@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["joerodrig3@gmail.com"]
 
   spec.summary       = "Easy Heroku DB backups to S3"
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/ableco/heroku_s3_backups"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
