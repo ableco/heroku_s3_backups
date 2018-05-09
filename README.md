@@ -46,7 +46,7 @@ HEROKU_API_KEY="1234-abcd"
 ```
 
 To run:
-`HerokuS3Backups::Heroku.new("name-of-application").backup("path/to/backup/folder")`
+`HerokuS3Backups::Heroku.new("name-of-application").backup_to_s3("path/to/backup/folder")`
 
 If you're running this in a Heroku application, ensure that you have the [Heroku Buildpack CLI](https://github.com/heroku/heroku-buildpack-cli) installed.
 
