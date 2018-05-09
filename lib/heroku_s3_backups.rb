@@ -3,6 +3,7 @@ require "heroku_s3_backups/version"
 require "heroku_cli.rb"
 module HerokuS3Backups
   class Heroku
+    attr_accessor :app_name
     include HerokuCLI
 
     # @param {string} app_name
