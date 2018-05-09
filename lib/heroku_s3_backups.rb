@@ -7,7 +7,6 @@ module HerokuS3Backups
     include HerokuCLI
 
     # @param {string} app_name
-    # @param {string} backup_location
     # @return nil
     def initialize(app_name)
       @app_name = app_name
