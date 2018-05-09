@@ -13,5 +13,15 @@ RSpec.describe HerokuCLI do
         HerokuCLI.cmd("pg:backup", "demo-application")
       end
     end
+
+    context "Heroku CLI is not found" do
+      before do
+        allow(File).to receive(:exist?).and_return(false)
+      end
+
+      it "should raise an error" do
+        expect { HerokuCLI.cmd("arg", "app-name") }.to raise_error(RuntimeError)
+      end
+    end
   end
 end
