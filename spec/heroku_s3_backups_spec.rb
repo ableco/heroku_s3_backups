@@ -5,7 +5,18 @@ RSpec.describe HerokuS3Backups do
 
   describe "Heroku" do
     describe "#initialize" do
-      # TODO
+      context "valid arguments not provided" do
+        it "should raise an error if required args aren't provided" do
+          expect { HerokuS3Backups::Heroku.new }.to raise_error(ArgumentError)
+        end
+      end
+
+      context "valid arguments provided" do
+        it "should set the instance variables appropriately" do
+          heroku_app = HerokuS3Backups::Heroku.new("demo-application")
+          expect(heroku_app.app_name).to eq("demo-application")
+        end
+      end
     end
 
     describe "#backup_to_s3" do
