@@ -3,7 +3,13 @@ RSpec.describe HerokuS3Backups do
     expect(HerokuS3Backups::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  describe "Heroku" do
+    describe "#initialize" do
+      # TODO
+    end
+
+    describe "#backup_to_s3" do
+      # TODO
+    end
   end
 end
