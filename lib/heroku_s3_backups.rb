@@ -17,7 +17,6 @@ module HerokuS3Backups
     # Valid options:
     # => {boolean} capture - If true, capture a new backup at the current point in
     #    time. Otherwise, we'll just download the latest backup
-    #
     # @param {hash} options
     # @return nil
     def backup_to_s3(backup_location, options = { capture: true })
@@ -42,20 +41,20 @@ module HerokuS3Backups
     # @param {hash} options
     # @return nil
     def capture(options = { maintenance_mode: false })
-
       # Enable maintenance mode if set
-      HerokuCLI.cmd("maintenance:on") if options[:maintenance_mode]
+      HerokuCLI.cmd("maintenance:on", @app_name) if options[:maintenance_mode]
 
       HerokuCLI.cmd("pg:backups:capture", @app_name)
 
       # Turn off maintenance mode once capture is complete
-      HerokuCLI.cmd("maintenance:off") if options[:maintenance_mode]
+      HerokuCLI.cmd("maintenance:off", @app_name) if options[:maintenance_mode]
     end
 
     # Download the latest backup
     # TODO: Be more explicit about which DB to download
     # @param {string} output_filename
     def download(output_filename)
+      raise "Please specify a filename" if output_filename.length.eql?(0)
       HerokuCLI.cmd("pg:backups:download --output #{output_filename}", @app_name)
     end
 
