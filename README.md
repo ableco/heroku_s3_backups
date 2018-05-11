@@ -29,6 +29,9 @@ Or install it yourself as:
     $ gem install heroku_s3_backups
 
 ## Usage
+
+### Backing up a Heroku database to S3
+
 The following environment variables must be set:
 - S3_ACCESS_KEY_ID - Key of an account that has write access to the backup bucket
 - S3_SECRET_ACCESS_KEY - Key of an account that has write access to the backup bucket
@@ -50,7 +53,7 @@ To run:
 
 If you're running this in a Heroku application, ensure that you have the [Heroku Buildpack CLI](https://github.com/heroku/heroku-buildpack-cli) installed.
 
-## Automating backups
+### Automating Heroku to S3 backups
 To automate backups in Heroku, you can create a rake task and add the ‘Heroku Scheduler’
 add-on to have it run the task in preset intervals.
 
@@ -58,6 +61,15 @@ Example:
 1) Create a rake task in `db.rake` named `s3_production_backup`
 2) Have the task run `HerokuS3Backups::Heroku.new("name-of-application").backup("path/to/backup/folder")`
 3) Set Heroku scheduler to run `rake db:s3_production_backup`
+
+### Capturing a new backup
+TODO
+
+### Automating backup captures
+TODO
+
+### Downloading a backup
+TODO
 
 ## Development
 
