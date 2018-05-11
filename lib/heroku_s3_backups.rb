@@ -38,24 +38,30 @@ module HerokuS3Backups
     # => {boolean} maintenance_mode - If true, set the application to go into
     #    maintenance mode to prevent further interaction until the capture is
     #    complete
+    # => {string?} target_db - If a target is set, a backup will be pulled from there,
+    #    otherwise, we'll pull from the default DB
     # @param {hash} options
     # @return nil
-    def capture(options = { maintenance_mode: false })
+    def capture(options = { maintenance_mode: false, target_db: nil })
       # Enable maintenance mode if set
       HerokuCLI.cmd("maintenance:on", @app_name) if options[:maintenance_mode]
 
-      HerokuCLI.cmd("pg:backups:capture", @app_name)
+      HerokuCLI.cmd("pg:backups:capture #{options[:target]}", @app_name)
 
       # Turn off maintenance mode once capture is complete
       HerokuCLI.cmd("maintenance:off", @app_name) if options[:maintenance_mode]
     end
 
     # Download the latest backup
-    # TODO: Be more explicit about which DB to download
     # @param {string} output_filename
-    def download(output_filename)
+    # @param {hash} options
+    # Valid options:
+    # => {string?} target_backup - If a target is set, a backup will be pulled from there,
+    #    otherwise, we'll pull from the latest backup
+    # @param {hash} options
+    def download(output_filename, options = {target_backup: nil})
       raise "Please specify a filename" if output_filename.length.eql?(0)
-      HerokuCLI.cmd("pg:backups:download --output #{output_filename}", @app_name)
+      HerokuCLI.cmd("pg:backups:download #{target_backup} --output #{output_filename}", @app_name)
     end
 
     private
